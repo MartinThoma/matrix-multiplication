@@ -6,8 +6,6 @@
 #include <boost/numeric/ublas/matrix.hpp>
 #include <boost/numeric/ublas/io.hpp>
 
-#define FILENAME "/home/moose/Desktop/matrix-multiplication/bigMatrix.txt"
-
 using namespace std;
 
 struct Result {
@@ -15,10 +13,10 @@ struct Result {
 	boost::numeric::ublas::matrix<int> B;
 };
 
-int getMatrixSize() {
+int getMatrixSize(string filename) {
 	string line;
 	ifstream infile;
-	infile.open (FILENAME);
+	infile.open (filename.c_str());
 	getline(infile, line);
 	return count(line.begin(), line.end(), '\t') + 1;
 }
@@ -35,15 +33,15 @@ void printMatrix(boost::numeric::ublas::matrix<int> matrix) {
 	}
 }
 
-Result read() {
+Result read(string filename) {
 	Result ab;
 	string line;
 	ifstream infile;
-	infile.open (FILENAME);
+	infile.open (filename.c_str());
 
 	// get dimension
 	getline(infile, line);
-	int n = getMatrixSize();
+	int n = getMatrixSize(filename);
 
 	boost::numeric::ublas::matrix<int> A(n,n), B(n,n);
 
@@ -83,8 +81,14 @@ Result read() {
 	return ab;
 }
 
-int main () {
-	Result result = read ();
+int main (int argc, char* argv[]) {
+	string filename;
+	if (argc < 3) {
+		filename = "bigMatrix.txt";
+	} else {
+		filename = argv[2];
+	}
+	Result result = read (filename);
 
 	boost::numeric::ublas::matrix<int> C;
 	C = boost::numeric::ublas::prod(result.A, result.B);

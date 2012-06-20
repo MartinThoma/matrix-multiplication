@@ -4,8 +4,6 @@
 #include <iostream>
 #include <vector>
 
-#define FILENAME "/home/moose/Desktop/matrix-multiplication/bigMatrix.txt"
-
 using namespace std;
 
 struct Result {
@@ -13,12 +11,12 @@ struct Result {
 	vector< vector<int> > B;
 };
 
-Result read() {
+Result read(string filename) {
 	vector< vector<int> > A, B;
 	Result ab;
 	string line;
 	ifstream infile;
-	infile.open (FILENAME);
+	infile.open (filename.c_str());
 
 	int i = 0;
 	while (getline(infile, line) && !line.empty()) {
@@ -83,8 +81,14 @@ void printMatrix(vector< vector<int> > matrix) {
 	}
 }
 
-int main () {
-	Result result = read ();
+int main (int argc, char* argv[]) {
+	string filename;
+	if (argc < 3) {
+		filename = "bigMatrix.txt";
+	} else {
+		filename = argv[2];
+	}
+	Result result = read (filename);
 	vector< vector<int> > C = ijkalgorithm(result.A, result.B);
 	printMatrix(C);
 	return 0;

@@ -16,7 +16,7 @@ Result read(string filename) {
 	Result ab;
 	string line;
 	ifstream infile;
-	infile.open (filename);
+	infile.open (filename.c_str());
 
 	int i = 0;
 	while (getline(infile, line) && !line.empty()) {
@@ -49,7 +49,7 @@ Result read(string filename) {
 	return ab;
 }
 
-vector< vector<int> > ijkalgorithm(vector< vector<int> > A, 
+vector< vector<int> > ikjalgorithm(vector< vector<int> > A, 
 									vector< vector<int> > B) {
 	int n = A.size();
 
@@ -89,7 +89,7 @@ int main (int argc, char* argv[]) {
 		filename = argv[2];
 	}
 	Result result = read (filename);
-	vector< vector<int> > C = ijkalgorithm(result.A, result.B);
+	vector< vector<int> > C = ikjalgorithm(result.A, result.B);
 	printMatrix(C);
 	return 0;
 }
