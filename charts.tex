@@ -2,13 +2,40 @@
 \usepackage{bchart}
 
 \begin{document}
+\section{Python}
 \begin{bchart}[step=5,max=60]
   \bcbar[text=ijk-algorithm]{56}
   \bigskip
   \bcbar[text=ikj-algorithm]{44}
   \bigskip
-  \bcbar[label=numpy]{2}
+  \bcbar[label=Psyco ikj-algorithm]{6}
+  \bigskip
+  \bcbar[label=NumPy]{2}
+  \bigskip
+  \bcbar[label=SciPy]{2}
   \bcxlabel{execution time in minutes}
+\end{bchart}
+
+\section{Java}
+\begin{bchart}[step=10,max=90]
+  \bcbar[text=ijk-algorithm with vectors]{81}
+  \bigskip
+  \bcbar[text=ijk-algorithm]{27}
+  \bigskip
+  \bcbar[label=ikj-algorithm]{1}
+  \bigskip
+  \bcbar[label=JAMA]{0.85}
+  \bcxlabel{execution time in minutes}
+\end{bchart}
+
+\section{C++}
+\begin{bchart}[step=20,max=260]
+  \bcbar[label=ijk-algorithm]{27}
+  \bigskip
+  \bcbar[label=ikj-algorithm]{15}
+  \bigskip
+  \bcbar[text=Boost]{250}
+  \bcxlabel{execution time in seconds}
 \end{bchart}
 
 \end{document}

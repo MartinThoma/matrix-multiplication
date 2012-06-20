@@ -1,8 +1,9 @@
-#PROBLEM = library-blitz
-PROBLEM = library-boost
+PROBLEM = library-blitz
+#PROBLEM = library-boost
 #PROBLEM = blitz-small
 #PROBLEM = ikj-algorithm
 #PROBLEM = ijk-algorithm
+#PROBLEM = library-cblas
 
 make:
 	g++ -std=c++98 -Wall -O3 -g $(PROBLEM).cpp -o $(PROBLEM).out -pedantic

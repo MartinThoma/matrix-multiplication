@@ -15,8 +15,7 @@ public class Shell {
         String thisLine;
 
         try {
-            BufferedReader br = new BufferedReader(
-                    new FileReader(filename));
+            BufferedReader br = new BufferedReader(new FileReader(filename));
 
             // Begin reading A
             while ((thisLine = br.readLine()) != null) {
@@ -69,32 +68,32 @@ public class Shell {
     }
 
     static void printMatrix(Matrix matrix, int n) {
-        for (int i=0; i < n; i++) {
-            for (int j=0; j < n; j++) {
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
                 if (j != 0) {
                     System.out.print("\t");
                 }
-               System.out.printf("%.0f", matrix.get(i, j));
+                System.out.printf("%.0f", matrix.get(i, j));
             }
             System.out.println("");
         }
     }
 
     public static void main(String[] args) {
-		String filename;
-		if (args.length < 2) {
-			filename = "/home/moose/smallMatrix.txt";
-		} else {
-			filename = args[1];
-		}
+        String filename;
+        if (args.length < 2) {
+            filename = "bigMatrix.txt";
+        } else {
+            filename = args[1];
+        }
         List<ArrayList<ArrayList<Double>>> matrices = read(filename);
         ArrayList<ArrayList<Double>> A = matrices.get(0);
         ArrayList<ArrayList<Double>> B = matrices.get(1);
         int n = A.size();
         double[][] Aarray = new double[n][n];
         double[][] Barray = new double[n][n];
-        for (int i=0; i < n; i++) {
-            for (int j=0; j < n; j++) {
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
                 Aarray[i][j] = A.get(i).get(j);
                 Barray[i][j] = B.get(i).get(j);
             }

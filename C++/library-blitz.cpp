@@ -6,7 +6,6 @@
 #include <blitz/matrix.h>
 #include <algorithm>
 
-#define FILENAME "/home/moose/Desktop/matrix-multiplication/bigMatrix.txt"
 #define N 2000
  
 using namespace std;
@@ -15,19 +14,19 @@ struct Result {
 	blitz::Matrix<int> A, B;
 };
 
-int getMatrixSize() {
+int getMatrixSize(string filename) {
 	string line;
 	ifstream infile;
-	infile.open (FILENAME);
+	infile.open (filename.c_str());
 	getline(infile, line);
 	return count(line.begin(), line.end(), '\t') + 1;
 }
 
-Result read() {
+Result read(string filename) {
 	Result ab;
 	string line;
 	ifstream infile;
-	infile.open (FILENAME);
+	infile.open (filename.c_str());
 
 	// get dimension
 	blitz::Matrix<int> A, B;
@@ -68,9 +67,9 @@ Result read() {
 	return ab;
 }
 
-void printMatrix(blitz::Matrix<int> matrix) {
-	for (unsigned int i=0; i < N; i++) {
-		for (unsigned int j=0; j < N; j++) {
+void printMatrix(blitz::Matrix<int> matrix, int n) {
+	for (unsigned int i=0; i < n; i++) {
+		for (unsigned int j=0; j < n; j++) {
 			cout << matrix(i, j);
 			if(j+1 != N) {
 				cout << "\t";
@@ -80,9 +79,17 @@ void printMatrix(blitz::Matrix<int> matrix) {
 	}
 }
 
-int main() {
+int main(int argc, char* argv[]) {
+	string filename;
+	if (argc < 3) {
+		filename = "bigMatrix.txt";
+	} else {
+		filename = argv[2];
+	}
 	Result a;
-	a = read ();
+
+	n = getMatrixSize(filename);
+	a = read (filename);
 
 	blitz::Matrix<int> A, B, C;
 
