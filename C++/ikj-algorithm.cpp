@@ -45,9 +45,8 @@ void read(string filename, vector< vector<int> > &A, vector< vector<int> > &B) {
 }
 
 vector< vector<int> > ikjalgorithm(vector< vector<int> > A, 
-									vector< vector<int> > B,
-									vector< vector<int> > &C) {
-	int n = A.size();
+								   vector< vector<int> > B,
+								   vector< vector<int> > &C, int n) {
 	for (register int i = 0; i < n; i++) {
 		for (register int k = 0; k < n; k++) {
 			for (register int j = 0; j < n; j++) {
@@ -58,15 +57,13 @@ vector< vector<int> > ikjalgorithm(vector< vector<int> > A,
 	return C;
 }
 
-void printMatrix(vector< vector<int> > matrix) {
-	vector< vector<int> >::iterator it;
-	vector<int>::iterator inner;
-	for (it=matrix.begin(); it != matrix.end(); it++) {
-		for (inner = it->begin(); inner != it->end(); inner++) {
-			cout << *inner;
-			if(inner+1 != it->end()) {
+void printMatrix(vector< vector<int> > matrix, int n) {
+	for (int i=0; i < n; i++) {
+		for (int j=0; j < n; j++) {
+			if (j != 0) {
 				cout << "\t";
 			}
+			cout << matrix[i][j];
 		}
 		cout << endl;
 	}
@@ -84,7 +81,7 @@ int main (int argc, char* argv[]) {
 	vector<int> inner (n);
 	vector< vector<int> > A(n, inner), B(n, inner), C(n, inner);
 	read (filename, A, B);
-	ikjalgorithm(A, B, C);
-	printMatrix(C);
+	ikjalgorithm(A, B, C, n);
+	printMatrix(C, n);
 	return 0;
 }
