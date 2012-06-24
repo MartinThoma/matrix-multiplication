@@ -7,11 +7,6 @@
 
 using namespace std;
 
-struct Result {
-	vector< vector<int> > A;
-	vector< vector<int> > B;
-};
-
 int getMatrixSize(string filename) {
 	string line;
 	ifstream infile;
@@ -20,19 +15,14 @@ int getMatrixSize(string filename) {
 	return count(line.begin(), line.end(), '\t') + 1;
 }
 
-Result read(string &filename) {
-	Result ab;
+void read(string &filename, vector< vector<int> > &A, vector< vector<int> > &B) {
 	string line;
 	FILE* matrixfile = freopen(filename.c_str(), "r", stdin);
 
-	int n = getMatrixSize(filename);
-	vector<int> inner (n);
-	vector< vector<int> > A(n, inner), B(n, inner);
-
-	int i = 0;
+	int i = 0, j, a;
 	while (getline(cin, line) && !line.empty()) {
 		istringstream iss(line);
-		int a, j = 0;
+		j = 0;
 		while (iss >> a) {
 			A[i][j] = a;
 			j++;
@@ -43,8 +33,7 @@ Result read(string &filename) {
 	i = 0;
 	while (getline(cin, line)) {
 		istringstream iss(line);
-		int a;
-		int j = 0;
+		j = 0;
 		while (iss >> a) {
 			B[i][j] = a;
 			j++;
@@ -53,9 +42,6 @@ Result read(string &filename) {
 	}
 
 	fclose (matrixfile);
-	ab.A = A;
-	ab.B = B;
-	return ab;
 }
 
 vector< vector<int> > ikjalgorithm(vector< vector<int> > A, 
@@ -97,8 +83,12 @@ int main (int argc, char* argv[]) {
 	} else {
 		filename = argv[2];
 	}
-	Result result = read (filename);
-	vector< vector<int> > C = ikjalgorithm(result.A, result.B);
+
+	int n = getMatrixSize(filename);
+	vector<int> inner (n);
+	vector< vector<int> > A(n, inner), B(n, inner);
+	read (filename, A, B);
+	vector< vector<int> > C = ikjalgorithm(A, B);
 	printMatrix(C);
 	return 0;
 }
