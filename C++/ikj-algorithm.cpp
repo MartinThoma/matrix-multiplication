@@ -15,7 +15,7 @@ int getMatrixSize(string filename) {
 	return count(line.begin(), line.end(), '\t') + 1;
 }
 
-void read(string &filename, vector< vector<int> > &A, vector< vector<int> > &B) {
+void read(string filename, vector< vector<int> > &A, vector< vector<int> > &B) {
 	string line;
 	FILE* matrixfile = freopen(filename.c_str(), "r", stdin);
 
@@ -45,13 +45,9 @@ void read(string &filename, vector< vector<int> > &A, vector< vector<int> > &B) 
 }
 
 vector< vector<int> > ikjalgorithm(vector< vector<int> > A, 
-									vector< vector<int> > B) {
+									vector< vector<int> > B,
+									vector< vector<int> > &C) {
 	int n = A.size();
-
-	// initialise C with 0s
-	vector<int> tmp(n, 0);
-	vector< vector<int> > C(n, tmp);
-
 	for (register int i = 0; i < n; i++) {
 		for (register int k = 0; k < n; k++) {
 			for (register int j = 0; j < n; j++) {
@@ -86,9 +82,9 @@ int main (int argc, char* argv[]) {
 
 	int n = getMatrixSize(filename);
 	vector<int> inner (n);
-	vector< vector<int> > A(n, inner), B(n, inner);
+	vector< vector<int> > A(n, inner), B(n, inner), C(n, inner);
 	read (filename, A, B);
-	vector< vector<int> > C = ikjalgorithm(A, B);
+	ikjalgorithm(A, B, C);
 	printMatrix(C);
 	return 0;
 }
