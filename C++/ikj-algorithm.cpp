@@ -3,6 +3,7 @@
 #include <fstream>
 #include <iostream>
 #include <vector>
+#include <algorithm>
 
 using namespace std;
 
@@ -11,39 +12,47 @@ struct Result {
 	vector< vector<int> > B;
 };
 
-Result read(string filename) {
-	vector< vector<int> > A, B;
-	Result ab;
+int getMatrixSize(string filename) {
 	string line;
 	ifstream infile;
 	infile.open (filename.c_str());
+	getline(infile, line);
+	return count(line.begin(), line.end(), '\t') + 1;
+}
+
+Result read(string &filename) {
+	Result ab;
+	string line;
+	FILE* matrixfile = freopen(filename.c_str(), "r", stdin);
+
+	int n = getMatrixSize(filename);
+	vector<int> inner (n);
+	vector< vector<int> > A(n, inner), B(n, inner);
 
 	int i = 0;
-	while (getline(infile, line) && !line.empty()) {
+	while (getline(cin, line) && !line.empty()) {
 		istringstream iss(line);
-		A.resize(A.size() + 1);
 		int a, j = 0;
 		while (iss >> a) {
-			A[i].push_back(a);
+			A[i][j] = a;
 			j++;
 		}
 		i++;
 	}
 
 	i = 0;
-	while (getline(infile, line)) {
+	while (getline(cin, line)) {
 		istringstream iss(line);
-		B.resize(B.size() + 1);
 		int a;
 		int j = 0;
 		while (iss >> a) {
-			B[i].push_back(a);
+			B[i][j] = a;
 			j++;
 		}
 		i++;
 	}
 
-	infile.close();
+	fclose (matrixfile);
 	ab.A = A;
 	ab.B = B;
 	return ab;
@@ -57,9 +66,9 @@ vector< vector<int> > ikjalgorithm(vector< vector<int> > A,
 	vector<int> tmp(n, 0);
 	vector< vector<int> > C(n, tmp);
 
-	for (int i = 0; i < n; i++) {
-		for (int k = 0; k < n; k++) {
-			for (int j = 0; j < n; j++) {
+	for (register int i = 0; i < n; i++) {
+		for (register int k = 0; k < n; k++) {
+			for (register int j = 0; j < n; j++) {
 				C[i][j] += A[i][k] * B[k][j];
 			}
 		}
