@@ -21,4 +21,4 @@ def saveMatrix(matrixA, matrixB, filename):
 n = 3
 matrixA = createRandomMatrix(n)
 matrixB = createRandomMatrix(n)
-saveMatrix(matrixA, matrixB, "bigMatrix.txt")
+saveMatrix(matrixA, matrixB, "bigMatrix.in")

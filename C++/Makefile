@@ -1,17 +1,18 @@
 #PROBLEM = library-blitz
-PROBLEM = library-boost
-#PROBLEM = blitz-small
-PROBLEM = ikj-algorithm
-#PROBLEM = ijk-algorithm
+#PROBLEM = library-boost
 #PROBLEM = library-cblas
+#PROBLEM = blitz-small
+#PROBLEM = ijk-algorithm
+PROBLEM = ikj-algorithm
+
+TESTSET = smallMatrix
 
 make:
 	g++ -std=c++98 -Wall -O3 -g $(PROBLEM).cpp -o $(PROBLEM).out -pedantic
-	#meld result-cpp.txt ../smallResult.txt
 
 test:
-	time ./$(PROBLEM).out -i ../bigMatrix.txt > result-cpp.txt
-	diff ../bigResult.txt result-cpp.txt
+	time ./$(PROBLEM).out -i ../$(TESTSET).in > result.txt
+	diff ../$(TESTSET).out result.txt
 
 clean:
 	rm -rf  $(TARGET) *.class *.html *.log *.aux *.out

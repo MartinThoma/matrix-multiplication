@@ -6,7 +6,7 @@ psyco.full()
 
 from optparse import OptionParser
 parser = OptionParser()
-parser.add_option("-i", dest="filename", default="bigMatrix.txt",
+parser.add_option("-i", dest="filename", default="bigMatrix.in",
      help="input file with two matrices", metavar="FILE")
 (options, args) = parser.parse_args()
 

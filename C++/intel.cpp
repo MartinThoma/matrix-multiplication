@@ -106,7 +106,7 @@ void printMatrix(vector< vector<int> > matrix) {
 int main (int argc, char* argv[]) {
 	string filename;
 	if (argc < 3) {
-		filename = "bigMatrix.txt";
+		filename = "bigMatrix.in";
 	} else {
 		filename = argv[2];
 	}
