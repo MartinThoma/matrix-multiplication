@@ -7,6 +7,8 @@ parser.add_option("-i", dest="filename", default="bigMatrix.in",
 	 help="input file with two matrices", metavar="FILE")
 (options, args) = parser.parse_args()
 
+from math import ceil, log
+
 def read(filename):
 	lines = open(filename, 'r').read().splitlines()
 	A = []
@@ -39,7 +41,7 @@ def subtract(A, B):
 			C[i][j] = A[i][j] - B[i][j]
 	return C
 
-def strassen(A, B):
+def strassenR(A, B):
 	""" Implementation of the strassen algorithm, similar to 
 		http://en.wikipedia.org/w/index.php?title=Strassen_algorithm&oldid=498910018#Source_code_of_the_Strassen_algorithm_in_C_language
 	"""
@@ -123,6 +125,26 @@ def strassen(A, B):
 				C[i + newSize][j] = c21[i][j]
 				C[i + newSize][j + newSize] = c22[i][j]
  		return C
+
+def strassen(A, B):
+	assert type(A) == list and type(B) == list
+	assert len(A) == len(A[0]) == len(B) == len(B[0])
+
+	nextPowerOfTwo = lambda n: 2**int(ceil(log(n,2)))
+	n = len(A)
+	m = nextPowerOfTwo(n)
+	APrep = [[0 for i in xrange(m)] for j in xrange(m)]
+	BPrep = [[0 for i in xrange(m)] for j in xrange(m)]
+	for i in xrange(n):
+		for j in xrange(n):
+			APrep[i][j] = A[i][j]
+			BPrep[i][j] = B[i][j]
+	CPrep = strassenR(APrep, BPrep)
+	C = [[0 for i in xrange(n)] for j in xrange(n)]
+	for i in xrange(n):
+		for j in xrange(n):
+			C[i][j] = CPrep[i][j]
+	return C
 
 A, B = read(options.filename)
 C = strassen(A, B)
