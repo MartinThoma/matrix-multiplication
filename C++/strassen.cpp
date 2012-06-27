@@ -238,7 +238,7 @@ int main (int argc, char* argv[]) {
 	vector<int> inner (n);
 	vector< vector<int> > A(n, inner), B(n, inner), C(n, inner);
 	read (filename, A, B);
-	strassen(A, B, C, n);
-	printMatrix(C, n);
+	//strassen(A, B, C, n);
+	//printMatrix(C, n);
 	return 0;
 }
