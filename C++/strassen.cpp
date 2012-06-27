@@ -15,6 +15,10 @@ using namespace std;
  
 void strassen(vector< vector<int> > &A, 
 			  vector< vector<int> > &B, 
+			  vector< vector<int> > &C, unsigned int tam);
+unsigned int nextPowerOfTwo(int n);
+void strassenR(vector< vector<int> > &A, 
+			  vector< vector<int> > &B, 
 			  vector< vector<int> > &C, 
 			  int tam);
 void sum(vector< vector<int> > &A, 
@@ -23,6 +27,9 @@ void sum(vector< vector<int> > &A,
 void subtract(vector< vector<int> > &A, 
 			  vector< vector<int> > &B, 
 			  vector< vector<int> > &C, int tam);
+
+void printMatrix(vector< vector<int> > matrix, int n);
+void read(string filename, vector< vector<int> > &A, vector< vector<int> > &B);
  
 void strassenR(vector< vector<int> > &A, 
 			  vector< vector<int> > &B, 
@@ -120,8 +127,25 @@ unsigned int nextPowerOfTwo(int n) {
 
 void strassen(vector< vector<int> > &A, 
 			  vector< vector<int> > &B, 
-			  vector< vector<int> > &C, int tam) {
+			  vector< vector<int> > &C, unsigned int n) {
+	//unsigned int n = tam;
+	unsigned int m = nextPowerOfTwo(n);
+	vector<int> inner(m);
+	vector< vector<int> > APrep(m, inner), BPrep(m, inner), CPrep(m, inner);
 
+	for(unsigned int i=0; i<n; i++) {
+		for (unsigned int j=0; j<n; j++) {
+			APrep[i][j] = A[i][j];
+			BPrep[i][j] = B[i][j];
+		}
+	}
+
+	strassenR(APrep, BPrep, CPrep, m);
+	for(unsigned int i=0; i<n; i++) {
+		for (unsigned int j=0; j<n; j++) {
+			C[i][j] = CPrep[i][j];
+		}
+	}
 }
 
 void sum(vector< vector<int> > &A, 
