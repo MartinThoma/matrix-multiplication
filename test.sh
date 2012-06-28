@@ -13,13 +13,15 @@ OPTIONS:
    -i      Input file
    -n      Number of executions
    -p      Program call with flags
+   -v      Verbose
 EOF
 }
 
 INPUTFILE=
 PROGRAMCALL=
 N=
-while getopts "hi:p:n:" OPTION
+VERBOSE=
+while getopts "hi:p:n:v" OPTION
 do
      case $OPTION in
          h)  usage
@@ -27,6 +29,7 @@ do
          i)  INPUTFILE=$OPTARG;;
          p)  PROGRAMCALL=$OPTARG;;
          n)  N=$OPTARG;;
+         v)  VERBOSE=1;;
          ?)  usage
              exit;;
      esac
@@ -59,7 +62,10 @@ do
 	  then
 		MAX=$DIFFE
 	fi
-	echo $i
+	if [ $VERBOSE ]
+		then
+			echo $i
+	fi
 done
 END=$(date +%s)
 
