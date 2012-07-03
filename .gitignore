@@ -8,5 +8,8 @@
 # C++ #
 *.out
 
+# Python #
+*.pyc
+
 # LaTeX #
 *.pdf

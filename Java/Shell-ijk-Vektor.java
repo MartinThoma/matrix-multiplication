@@ -14,8 +14,8 @@ public class Shell {
 
         try {
             BufferedReader br = new BufferedReader(
-                    new FileReader(
-                            "/home/moose/Desktop/matrix-multiplication/bigMatrix.in"));
+                        new FileReader("2000.in")
+                    );
 
             // Begin reading A
             while ((thisLine = br.readLine()) != null) {

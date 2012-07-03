@@ -84,7 +84,7 @@ public class Shell {
     public static void main(String[] args) {
 		String filename;
 		if (args.length < 2) {
-			filename = "bigMatrix.in";
+			filename = "2000.in";
 		} else {
 			filename = args[1];
 		}

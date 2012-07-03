@@ -59,7 +59,7 @@ void printMatrix(vector< vector<int> > matrix, int n) {
 int main (int argc, char* argv[]) {
 	string filename;
 	if (argc < 3) {
-		filename = "bigMatrix.in";
+		filename = "2000.in";
 	} else {
 		filename = argv[2];
 	}

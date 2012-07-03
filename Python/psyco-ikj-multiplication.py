@@ -5,10 +5,6 @@ import psyco
 psyco.full()
 
 from optparse import OptionParser
-parser = OptionParser()
-parser.add_option("-i", dest="filename", default="bigMatrix.in",
-     help="input file with two matrices", metavar="FILE")
-(options, args) = parser.parse_args()
 
 def read(filename):
 	lines = open(filename, 'r').read().splitlines()
@@ -35,6 +31,12 @@ def ikjMatrixProduct(A, B):
 				C[i][j] += A[i][k] * B[k][j]
 	return C
 
-A, B = read(options.filename)
-C = ikjMatrixProduct(A, B)
-printMatrix(C)
+if __name__ == "__main__":
+    parser = OptionParser()
+    parser.add_option("-i", dest="filename", default="2000.in",
+         help="input file with two matrices", metavar="FILE")
+    (options, args) = parser.parse_args()
+    
+    A, B = read(options.filename)
+    C = ikjMatrixProduct(A, B)
+    printMatrix(C)

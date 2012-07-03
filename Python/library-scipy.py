@@ -5,10 +5,6 @@ import numpy
 import scipy
 
 from optparse import OptionParser
-parser = OptionParser()
-parser.add_option("-i", dest="filename", default="bigMatrix.in",
-     help="input file with two matrices", metavar="FILE")
-(options, args) = parser.parse_args()
 
 def read(filename):
 	lines = open(filename, 'r').read().splitlines()
@@ -27,8 +23,14 @@ def printMatrix(matrix):
 	for line in matrix:
 		print "\t".join(map(str,line))
 
-A, B = read(options.filename)
-A = scipy.matrix(A)
-B = scipy.matrix(B)
-C = A * B # easy and intuitive, isn't it?
-printMatrix(C)
+if __name__ == "__main__":
+    parser = OptionParser()
+    parser.add_option("-i", dest="filename", default="2000.in",
+         help="input file with two matrices", metavar="FILE")
+    (options, args) = parser.parse_args()
+    
+    A, B = read(options.filename)
+    A = scipy.matrix(A)
+    B = scipy.matrix(B)
+    C = A * B # easy and intuitive, isn't it?
+    printMatrix(C)
