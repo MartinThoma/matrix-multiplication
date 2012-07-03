@@ -1,3 +1,4 @@
 Script;Matrix;User-Time
-C++/strassen.cpp;bigMatrix.in;45m0417s
-Python/strassen.cpp;bigMatrix.in;10h+
+C++/strassen.cpp;2000.in;45m0417s
+Python/strassen.cpp;2000.in;10h+
+C++/library-boost.cpp;2000.in;32.86s
