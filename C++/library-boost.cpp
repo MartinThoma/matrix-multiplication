@@ -21,18 +21,7 @@ void read(string filename, boost::numeric::ublas::matrix<int> &A, boost::numeric
 	string line;
 	ifstream infile;
 	infile.open (filename.c_str());
-
-	// get dimension
-	getline(infile, line);
-
-	// process first line
-	istringstream iss(line);
-	int a, i = 0, j = 0;
-	while (iss >> a) {
-		A(i,j) = a;
-		j++;
-	}
-	i++;
+	int i=0, j, a;
 
 	while (getline(infile, line) && !line.empty()) {
 		istringstream iss(line);
