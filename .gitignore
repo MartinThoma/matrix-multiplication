@@ -10,6 +10,7 @@
 
 # Python #
 *.pyc
+.coverage
 
 # LaTeX #
 *.pdf
