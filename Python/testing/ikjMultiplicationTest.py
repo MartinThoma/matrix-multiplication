@@ -1,7 +1,9 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
+import sys
 import unittest
+sys.path.append("/home/moose/Downloads/matrix-multiplication/Python/")
 from ikjMultiplication import ikjMatrixProduct
 
 class TestCase(unittest.TestCase):    
