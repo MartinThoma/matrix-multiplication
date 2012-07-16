@@ -1,5 +1,16 @@
-\documentclass{article}
+\documentclass[a4paper,12pt]{article}
+\usepackage{amssymb} % needed for math
+\usepackage{amsmath} % needed for math
+\usepackage[utf8]{inputenc} % this is needed for umlauts
+\usepackage[ngerman]{babel} % this is needed for umlauts
+\usepackage[T1]{fontenc}    % this is needed for correct output of umlauts in pdf
+\usepackage[margin=2.5cm]{geometry} %layout
+\usepackage{fancyhdr}  % needed for the footer
+\usepackage{lastpage}  % needed for the footer
+\usepackage{hyperref}  % links im text
+
 \usepackage{bchart}
+\usepackage{pgfplots}
 
 \begin{document}
 \section{Python}
@@ -38,4 +49,54 @@
   \bcxlabel{execution time in seconds}
 \end{bchart}
 
+\section{Values for LEAF\_SIZE}
+\subsubsection{logarithmic scale}
+    \begin{tikzpicture}
+       \begin{axis}[
+            width=15cm, height=8cm, % size of the image
+            grid = major,           
+            grid style={dashed, gray!30},
+            %xmode=log,log basis x=2,
+            %ymode=log,log basis y=2,
+            ymin=0, 
+            ylabel=time in seconds,
+            xlabel=leaf size]
+
+            \addplot table [id=exp]{LEAF_SIZE.csv};
+            %\addplot[smooth,samples=200,domain=2:130,thick,red] {600/(x)+15}; 
+            \legend{%
+                2000 $\times$ 2000 matrix,
+                $\frac{600}{x}+15$
+            }
+        \end{axis}
+    \end{tikzpicture}
+
+\subsubsection{logarithmic scale}
+    \begin{tikzpicture}
+       \begin{axis}[
+            width=15cm, height=8cm, % size of the image
+            grid = major,           
+            grid style={dashed, gray!30},
+            xmode=log,log basis x=2,
+            ymode=log,log basis y=10,
+            ymin=0, 
+            ylabel=time in seconds,
+            xlabel=leaf size]
+
+            \addplot table [id=exp]{LEAF_SIZE.csv};
+            \addplot[smooth,samples=200,domain=2:130,thick,red]   {750}; 
+            \addplot[smooth,samples=200,domain=2:130,thick,green] {197}; 
+            \addplot[smooth,samples=200,domain=2:130,thick,orange] {66}; 
+            \addplot[smooth,samples=200,domain=2:130,thick,lime]   {30}; 
+            \addplot[smooth,samples=200,domain=2:130,thick,purple] {19}; 
+            \legend{%
+                2000 $\times$ 2000 matrix,
+                $750$ seconds,
+                $197$ seconds,
+                $66$ seconds,
+                $30$ seconds,
+                $19$ seconds
+            }
+        \end{axis}
+    \end{tikzpicture}
 \end{document}

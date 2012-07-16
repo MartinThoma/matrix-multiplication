@@ -6,7 +6,7 @@
 #include <algorithm>
 #include <cmath>
 
-#define LEAF_SIZE 50
+#define LEAF_SIZE 15
 
 using namespace std;
 
@@ -33,7 +33,6 @@ void subtract(vector< vector<int> > &A,
 void printMatrix(vector< vector<int> > matrix, int n);
 void read(string filename, vector< vector<int> > &A, vector< vector<int> > &B);
 
-// TODO
 void ikjalgorithm(vector< vector<int> > A, 
                                    vector< vector<int> > B,
                                    vector< vector<int> > &C, int n) {
@@ -46,14 +45,11 @@ void ikjalgorithm(vector< vector<int> > A,
     }
 }
 
-// TODO
 void strassenR(vector< vector<int> > &A, 
               vector< vector<int> > &B, 
               vector< vector<int> > &C, int tam) {
- 
-    // trivial case: when the matrix is 1 X 1:
     if (tam <= LEAF_SIZE) {
-        ikjalgorithm(A, B, C, tam);// TODO
+        ikjalgorithm(A, B, C, tam);
         return;
     }
  
