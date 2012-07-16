@@ -1,10 +1,11 @@
 #PROBLEM = library-blitz
-PROBLEM = library-boost
+#PROBLEM = library-boost
 #PROBLEM = library-cblas
 #PROBLEM = blitz-small
 #PROBLEM = ijk-algorithm
 #PROBLEM = ikj-algorithm
 #PROBLEM = strassen
+PROBLEM = strassen-mixed
 #PROBLEM = read-write-only
 
 TESTSET = 2000
