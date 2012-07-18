@@ -1,8 +1,6 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-from optparse import OptionParser
-
 def read(filename):
     lines = open(filename, 'r').read().splitlines()
     A = []
@@ -29,11 +27,13 @@ def ikjMatrixProduct(A, B):
     return C
 
 if __name__ == "__main__":
-    parser = OptionParser()
-    parser.add_option("-i", dest="filename", default="2000.in",
-         help="input file with two matrices", metavar="FILE")
-    (options, args) = parser.parse_args()
+    from argparse import ArgumentParser
 
-    A, B = read(options.filename)
+    parser = ArgumentParser(description="ikjMatrix multiplication")
+    parser.add_argument("-i", dest="filename", default="2000.in",
+         help="input file with two matrices", metavar="FILE")
+    args = parser.parse_args()
+
+    A, B = read(args.filename)
     C = ikjMatrixProduct(A, B)
     printMatrix(C)
