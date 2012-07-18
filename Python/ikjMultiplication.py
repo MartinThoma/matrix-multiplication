@@ -13,9 +13,9 @@ def read(filename):
             matrix = B
     return A, B
 
-def printMatrix(matrix):
+def printMatrix(matrix, f):
     for line in matrix:
-        print "\t".join(map(str,line))
+        f.write("\t".join(map(str,line)) + "\n")
 
 def ikjMatrixProduct(A, B):
     n = len(A)
@@ -26,14 +26,29 @@ def ikjMatrixProduct(A, B):
                 C[i][j] += A[i][k] * B[k][j]
     return C
 
+def extant_file(x):
+    """
+    'Type' for argparse - checks that file exists but does not open.
+    """
+    if not isfile(x):
+        raise argparse.ArgumentError("{0} does not exist".format(x))
+    return x
+
 if __name__ == "__main__":
+    import argparse, sys
+    from os.path import isfile
     from argparse import ArgumentParser
 
     parser = ArgumentParser(description="ikjMatrix multiplication")
-    parser.add_argument("-i", dest="filename", default="2000.in",
-         help="input file with two matrices", metavar="FILE")
+    parser.add_argument("-i", "--input",
+        dest="filename", required=True, type=extant_file,
+        help="input file with two matrices", metavar="FILE")
+    parser.add_argument("-o", "--output",
+        type=argparse.FileType(mode='w'),
+        default=sys.stdout, dest="output",
+        help="file to write output to (default=stdout)")
     args = parser.parse_args()
 
     A, B = read(args.filename)
     C = ikjMatrixProduct(A, B)
-    printMatrix(C)
+    printMatrix(C, args.output)
