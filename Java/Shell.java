@@ -1,16 +1,20 @@
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-import Jama.Matrix;
+import org.kohsuke.args4j.CmdLineException;
+import org.kohsuke.args4j.CmdLineParser;
 
 public class Shell {
-    static List<ArrayList<ArrayList<Double>>> read(String filename) {
-        ArrayList<ArrayList<Double>> A = new ArrayList<ArrayList<Double>>();
-        ArrayList<ArrayList<Double>> B = new ArrayList<ArrayList<Double>>();
+    static List<ArrayList<ArrayList<Integer>>> read(File filename) {
+        ArrayList<ArrayList<Integer>> A =
+            new ArrayList<ArrayList<Integer>>();
+        ArrayList<ArrayList<Integer>> B =
+            new ArrayList<ArrayList<Integer>>();
 
         String thisLine;
 
@@ -23,10 +27,11 @@ public class Shell {
                 if (thisLine.trim().equals("")) {
                     break;
                 } else {
-                    ArrayList<Double> line = new ArrayList<Double>();
+                    ArrayList<Integer> line =
+                        new ArrayList<Integer>();
                     String[] lineArray = thisLine.split("\t");
                     for (String number : lineArray) {
-                        line.add((double) Integer.parseInt(number));
+                        line.add(Integer.parseInt(number));
                     }
                     A.add(line);
                 }
@@ -34,10 +39,10 @@ public class Shell {
 
             // Begin reading B
             while ((thisLine = br.readLine()) != null) {
-                ArrayList<Double> line = new ArrayList<Double>();
+                ArrayList<Integer> line = new ArrayList<Integer>();
                 String[] lineArray = thisLine.split("\t");
                 for (String number : lineArray) {
-                    line.add((double) Integer.parseInt(number));
+                    line.add(Integer.parseInt(number));
                 }
                 B.add(line);
             }
@@ -45,7 +50,8 @@ public class Shell {
             System.err.println("Error: " + e);
         }
 
-        List<ArrayList<ArrayList<Double>>> res = new LinkedList<ArrayList<ArrayList<Double>>>();
+        List<ArrayList<ArrayList<Integer>>> res =
+            new LinkedList<ArrayList<ArrayList<Integer>>>();
         res.add(A);
         res.add(B);
         return res;
@@ -59,8 +65,8 @@ public class Shell {
         int[][] C = new int[n][n];
 
         for (int i = 0; i < n; i++) {
-            for (int j = 0; j < n; j++) {
-                for (int k = 0; k < n; k++) {
+            for (int k = 0; k < n; k++) {
+            	for (int j = 0; j < n; j++) {
                     C[i][j] += A.get(i).get(k) * B.get(k).get(j);
                 }
             }
@@ -68,42 +74,38 @@ public class Shell {
         return C;
     }
 
-    static void printMatrix(Matrix matrix, int n) {
-        for (int i=0; i < n; i++) {
-            for (int j=0; j < n; j++) {
-                if (j != 0) {
+    static void printMatrix(int[][] matrix) {
+        for (int[] line : matrix) {
+            int i = 0;
+            for (int number : line) {
+                if (i != 0) {
                     System.out.print("\t");
+                } else {
+                    i++;
                 }
-               System.out.printf("%.0f", matrix.get(i, j));
+                System.out.print(number);
             }
             System.out.println("");
         }
     }
 
     public static void main(String[] args) {
-		String filename;
-		if (args.length < 2) {
-			filename = "2000.in";
-		} else {
-			filename = args[1];
-		}
-        List<ArrayList<ArrayList<Double>>> matrices = read(filename);
-        ArrayList<ArrayList<Double>> A = matrices.get(0);
-        ArrayList<ArrayList<Double>> B = matrices.get(1);
-        int n = A.size();
-        double[][] Aarray = new double[n][n];
-        double[][] Barray = new double[n][n];
-        for (int i=0; i < n; i++) {
-            for (int j=0; j < n; j++) {
-                Aarray[i][j] = A.get(i).get(j);
-                Barray[i][j] = B.get(i).get(j);
-            }
-        }
-        Matrix AM = new Matrix(Aarray);
-        Matrix BM = new Matrix(Barray);
-        Matrix CM = AM.times(BM);
+        CommandLineValues values = new CommandLineValues(args);
+        CmdLineParser parser = new CmdLineParser(values);
 
-        printMatrix(CM, n);
+        try {
+            parser.parseArgument(args);
+        } catch (CmdLineException e) {
+            System.exit(1);
+        }
+
+        // Now you can use the command line values
+        List<ArrayList<ArrayList<Integer>>> matrices =
+            read(values.getSource());
+        ArrayList<ArrayList<Integer>> A = matrices.get(0);
+        ArrayList<ArrayList<Integer>> B = matrices.get(1);
+        int[][] C = ijkAlgorithm(A, B);
+        printMatrix(C);
     }
 
 }
