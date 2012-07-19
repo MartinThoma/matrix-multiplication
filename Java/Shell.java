@@ -9,6 +9,10 @@ import java.util.List;
 import org.kohsuke.args4j.CmdLineException;
 import org.kohsuke.args4j.CmdLineParser;
 
+/**
+ * This class manages I/O.
+ * @author Martin Thoma
+ */
 public class Shell {
     static List<ArrayList<ArrayList<Integer>>> read(File filename) {
         ArrayList<ArrayList<Integer>> A =
@@ -57,23 +61,6 @@ public class Shell {
         return res;
     }
 
-    static int[][] ijkAlgorithm(ArrayList<ArrayList<Integer>> A,
-            ArrayList<ArrayList<Integer>> B) {
-        int n = A.size();
-
-        // initialise C
-        int[][] C = new int[n][n];
-
-        for (int i = 0; i < n; i++) {
-            for (int k = 0; k < n; k++) {
-            	for (int j = 0; j < n; j++) {
-                    C[i][j] += A.get(i).get(k) * B.get(k).get(j);
-                }
-            }
-        }
-        return C;
-    }
-
     static void printMatrix(int[][] matrix) {
         for (int[] line : matrix) {
             int i = 0;
@@ -104,7 +91,7 @@ public class Shell {
             read(values.getSource());
         ArrayList<ArrayList<Integer>> A = matrices.get(0);
         ArrayList<ArrayList<Integer>> B = matrices.get(1);
-        int[][] C = ijkAlgorithm(A, B);
+        int[][] C = MatrixMultiplication.ijkAlgorithm(A, B);
         printMatrix(C);
     }
 
