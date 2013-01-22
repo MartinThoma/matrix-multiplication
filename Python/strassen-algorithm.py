@@ -20,6 +20,15 @@ def printMatrix(matrix):
     for line in matrix:
         print "\t".join(map(str,line))
 
+def ikjMatrixProduct(A, B):
+    n = len(A)
+    C = [[0 for i in xrange(n)] for j in xrange(n)]
+    for i in xrange(n):
+        for k in xrange(n):
+            for j in xrange(n):
+                C[i][j] += A[i][k] * B[k][j]
+    return C
+
 def add(A, B):
     n = len(A)
     C = [[0 for j in xrange(0, n)] for i in xrange(0, n)]
@@ -42,9 +51,8 @@ def strassenR(A, B):
     """
     n = len(A)
 
-    # Trivial Case: 1x1 Matrices
-    if n == 1:
-        return [[A[0][0]*B[0][0]]]
+    if n <= LEAF_SIZE:
+        return ikjMatrixProduct(A, B)
     else:
         # initializing the new sub-matrices
         newSize = n/2
@@ -75,8 +83,8 @@ def strassenR(A, B):
                 b22[i][j] = B[i + newSize][j + newSize]; # bottom right
 
         # Calculating p1 to p7:
-         aResult = add(a11, a22)
-         bResult = add(b11, b22)
+        aResult = add(a11, a22)
+        bResult = add(b11, b22)
         p1 = strassen(aResult, bResult) # p1 = (a11+a22) * (b11+b22)
  
         aResult = add(a21, a22)      # a21 + a22
@@ -119,12 +127,15 @@ def strassenR(A, B):
                 C[i][j + newSize] = c12[i][j]
                 C[i + newSize][j] = c21[i][j]
                 C[i + newSize][j + newSize] = c22[i][j]
-         return C
+        return C
 
 def strassen(A, B):
     assert type(A) == list and type(B) == list
     assert len(A) == len(A[0]) == len(B) == len(B[0])
 
+    # Make the matrices bigger so that you can apply the strassen
+    # algorithm recursively without having to deal with odd
+    # matrix sizes
     nextPowerOfTwo = lambda n: 2**int(ceil(log(n,2)))
     n = len(A)
     m = nextPowerOfTwo(n)
@@ -145,8 +156,12 @@ if __name__ == "__main__":
     parser = OptionParser()
     parser.add_option("-i", dest="filename", default="2000.in",
          help="input file with two matrices", metavar="FILE")
+    parser.add_option("-l", dest="LEAF_SIZE", default="8",
+         help="when do you start using ikj", metavar="LEAF_SIZE")
     (options, args) = parser.parse_args()
 
+    LEAF_SIZE = options.LEAF_SIZE
     A, B = read(options.filename)
+
     C = strassen(A, B)
     printMatrix(C)

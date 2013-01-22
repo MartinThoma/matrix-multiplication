@@ -6,6 +6,9 @@
 #include <algorithm>
 #include <cmath>
 
+// Set LEAF_SIZE to 1 if you want to the pure strassen algorithm
+// otherwise, the ikj-algorithm will be applied when the split
+// matrices are as small as LEAF_SIZE x LEAF_SIZE
 #define LEAF_SIZE 15
 
 using namespace std;
