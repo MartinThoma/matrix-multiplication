@@ -9,7 +9,7 @@
 // Set LEAF_SIZE to 1 if you want to the pure strassen algorithm
 // otherwise, the ikj-algorithm will be applied when the split
 // matrices are as small as LEAF_SIZE x LEAF_SIZE
-#define LEAF_SIZE 15
+#define LEAF_SIZE 16
 
 using namespace std;
 
@@ -89,27 +89,27 @@ void strassenR(vector< vector<int> > &A,
  
         sum(a11, a22, aResult, newTam); // a11 + a22
         sum(b11, b22, bResult, newTam); // b11 + b22
-        strassen(aResult, bResult, p1, newTam); // p1 = (a11+a22) * (b11+b22)
+        strassenR(aResult, bResult, p1, newTam); // p1 = (a11+a22) * (b11+b22)
  
         sum(a21, a22, aResult, newTam); // a21 + a22
-        strassen(aResult, b11, p2, newTam); // p2 = (a21+a22) * (b11)
+        strassenR(aResult, b11, p2, newTam); // p2 = (a21+a22) * (b11)
  
         subtract(b12, b22, bResult, newTam); // b12 - b22
-        strassen(a11, bResult, p3, newTam); // p3 = (a11) * (b12 - b22)
+        strassenR(a11, bResult, p3, newTam); // p3 = (a11) * (b12 - b22)
  
         subtract(b21, b11, bResult, newTam); // b21 - b11
-        strassen(a22, bResult, p4, newTam); // p4 = (a22) * (b21 - b11)
+        strassenR(a22, bResult, p4, newTam); // p4 = (a22) * (b21 - b11)
  
         sum(a11, a12, aResult, newTam); // a11 + a12
-        strassen(aResult, b22, p5, newTam); // p5 = (a11+a12) * (b22)   
+        strassenR(aResult, b22, p5, newTam); // p5 = (a11+a12) * (b22)   
  
         subtract(a21, a11, aResult, newTam); // a21 - a11
         sum(b11, b12, bResult, newTam); // b11 + b12
-        strassen(aResult, bResult, p6, newTam); // p6 = (a21-a11) * (b11+b12)
+        strassenR(aResult, bResult, p6, newTam); // p6 = (a21-a11) * (b11+b12)
  
         subtract(a12, a22, aResult, newTam); // a12 - a22
         sum(b21, b22, bResult, newTam); // b21 + b22
-        strassen(aResult, bResult, p7, newTam); // p7 = (a12-a22) * (b21+b22)
+        strassenR(aResult, bResult, p7, newTam); // p7 = (a12-a22) * (b21+b22)
  
         // calculating c21, c21, c11 e c22:
  
