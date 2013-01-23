@@ -12,6 +12,10 @@ public class CommandLineValues {
             usage = "input file with two matrices")
     private File source;
 
+    @Option(name = "-l", aliases = { "--leafsize" },
+            required = false, usage = "input file with two matrices")
+    private int leafsize = 32;
+
     private boolean errorFree = false;
 
     public CommandLineValues(String... args) {
@@ -33,8 +37,7 @@ public class CommandLineValues {
     }
 
     /**
-     * Returns whether the parameters could be parsed without an
-     * error.
+     * Returns whether the parameters could be parsed without an error.
      *
      * @return true if no error occurred.
      */
@@ -49,5 +52,12 @@ public class CommandLineValues {
      */
     public File getSource() {
         return source;
+    }
+
+    /**
+     * @return the leafsize
+     */
+    public int getLeafsize() {
+        return leafsize;
     }
 }

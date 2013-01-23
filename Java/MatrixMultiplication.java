@@ -7,7 +7,7 @@ import java.util.Vector;
  * @author Martin Thoma
  */
 public class MatrixMultiplication {
-    static int LEAF_SIZE = 8;
+    static int LEAF_SIZE = 1;
 
     public static int[][] ijkAlgorithmVector(Vector<Vector<Integer>> A,
             Vector<Vector<Integer>> B) {
@@ -113,7 +113,7 @@ public class MatrixMultiplication {
         int[][] APrep = new int[m][m];
         int[][] BPrep = new int[m][m];
         for (int i = 0; i < n; i++) {
-            for (int j = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
                 APrep[i][j] = A.get(i).get(j);
                 BPrep[i][j] = B.get(i).get(j);
             }
@@ -168,30 +168,33 @@ public class MatrixMultiplication {
             // Calculating p1 to p7:
             aResult = add(a11, a22);
             bResult = add(b11, b22);
-            int[][] p1 = strassenR(aResult, bResult); // p1 = (a11+a22) *
-            // (b11+b22)
+            int[][] p1 = strassenR(aResult, bResult);
+            // p1 = (a11+a22) * (b11+b22)
 
             aResult = add(a21, a22); // a21 + a22
             int[][] p2 = strassenR(aResult, b11); // p2 = (a21+a22) * (b11)
 
             bResult = subtract(b12, b22); // b12 - b22
-            int[][] p3 = strassenR(a11, bResult); // p3 = (a11) * (b12 - b22)
+            int[][] p3 = strassenR(a11, bResult);
+            // p3 = (a11) * (b12 - b22)
 
             bResult = subtract(b21, b11); // b21 - b11
-            int[][] p4 = strassenR(a22, bResult); // p4 = (a22) * (b21 - b11)
+            int[][] p4 = strassenR(a22, bResult);
+            // p4 = (a22) * (b21 - b11)
 
             aResult = add(a11, a12); // a11 + a12
-            int[][] p5 = strassenR(aResult, b22); // p5 = (a11+a12) * (b22)
+            int[][] p5 = strassenR(aResult, b22);
+            // p5 = (a11+a12) * (b22)
 
             aResult = subtract(a21, a11); // a21 - a11
             bResult = add(b11, b12); // b11 + b12
-            int[][] p6 = strassenR(aResult, bResult); // p6 = (a21-a11) *
-            // (b11+b12)
+            int[][] p6 = strassenR(aResult, bResult);
+            // p6 = (a21-a11) * (b11+b12)
 
             aResult = subtract(a12, a22); // a12 - a22
             bResult = add(b21, b22); // b21 + b22
-            int[][] p7 = strassenR(aResult, bResult); // p7 = (a12-a22) *
-            // (b21+b22)
+            int[][] p7 = strassenR(aResult, bResult);
+            // p7 = (a12-a22) * (b21+b22)
 
             // calculating c21, c21, c11 e c22:
             int[][] c12 = add(p3, p5); // c12 = p3 + p5
@@ -199,19 +202,13 @@ public class MatrixMultiplication {
 
             aResult = add(p1, p4); // p1 + p4
             bResult = add(aResult, p7); // p1 + p4 + p7
-            int[][] c11 = subtract(bResult, p5); // c11 =
-            // p1 +
-            // p4 -
-            // p5 +
-            // p7
+            int[][] c11 = subtract(bResult, p5);
+            // c11 = p1 + p4 - p5 + p7
 
             aResult = add(p1, p3); // p1 + p3
             bResult = add(aResult, p6); // p1 + p3 + p6
-            int[][] c22 = subtract(bResult, p2); // c22 =
-            // p1 +
-            // p3 -
-            // p2 +
-            // p6
+            int[][] c22 = subtract(bResult, p2);
+            // c22 = p1 + p3 - p2 + p6
 
             // Grouping the results obtained in a single matrix:
             int[][] C = new int[n][n];
@@ -227,4 +224,3 @@ public class MatrixMultiplication {
         }
     }
 }
-

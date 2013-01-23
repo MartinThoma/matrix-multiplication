@@ -11,28 +11,25 @@ import org.kohsuke.args4j.CmdLineParser;
 
 /**
  * This class manages I/O.
+ * 
  * @author Martin Thoma
  */
 public class Shell {
     static List<ArrayList<ArrayList<Integer>>> read(File filename) {
-        ArrayList<ArrayList<Integer>> A =
-            new ArrayList<ArrayList<Integer>>();
-        ArrayList<ArrayList<Integer>> B =
-            new ArrayList<ArrayList<Integer>>();
+        ArrayList<ArrayList<Integer>> A = new ArrayList<ArrayList<Integer>>();
+        ArrayList<ArrayList<Integer>> B = new ArrayList<ArrayList<Integer>>();
 
         String thisLine;
 
         try {
-            BufferedReader br = new BufferedReader(
-                    new FileReader(filename));
+            BufferedReader br = new BufferedReader(new FileReader(filename));
 
             // Begin reading A
             while ((thisLine = br.readLine()) != null) {
                 if (thisLine.trim().equals("")) {
                     break;
                 } else {
-                    ArrayList<Integer> line =
-                        new ArrayList<Integer>();
+                    ArrayList<Integer> line = new ArrayList<Integer>();
                     String[] lineArray = thisLine.split("\t");
                     for (String number : lineArray) {
                         line.add(Integer.parseInt(number));
@@ -54,14 +51,13 @@ public class Shell {
             System.err.println("Error: " + e);
         }
 
-        List<ArrayList<ArrayList<Integer>>> res =
-            new LinkedList<ArrayList<ArrayList<Integer>>>();
+        List<ArrayList<ArrayList<Integer>>> res = new LinkedList<ArrayList<ArrayList<Integer>>>();
         res.add(A);
         res.add(B);
         return res;
     }
 
-    static void printMatrix(int[][] matrix) {
+    public static void printMatrix(int[][] matrix) {
         for (int[] line : matrix) {
             int i = 0;
             for (int number : line) {
@@ -87,11 +83,11 @@ public class Shell {
         }
 
         // Now you can use the command line values
-        List<ArrayList<ArrayList<Integer>>> matrices =
-            read(values.getSource());
+        List<ArrayList<ArrayList<Integer>>> matrices = read(values.getSource());
         ArrayList<ArrayList<Integer>> A = matrices.get(0);
         ArrayList<ArrayList<Integer>> B = matrices.get(1);
-        int[][] C = MatrixMultiplication.ijkAlgorithm(A, B);
+        MatrixMultiplication.LEAF_SIZE = values.getLeafsize();
+        int[][] C = MatrixMultiplication.strassen(A, B);
         printMatrix(C);
     }
 
