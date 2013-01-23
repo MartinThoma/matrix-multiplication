@@ -9,7 +9,7 @@
 // Set LEAF_SIZE to 1 if you want to the pure strassen algorithm
 // otherwise, the ikj-algorithm will be applied when the split
 // matrices are as small as LEAF_SIZE x LEAF_SIZE
-#define LEAF_SIZE 16
+int leafsize;
 
 using namespace std;
 
@@ -51,7 +51,7 @@ void ikjalgorithm(vector< vector<int> > A,
 void strassenR(vector< vector<int> > &A, 
               vector< vector<int> > &B, 
               vector< vector<int> > &C, int tam) {
-    if (tam <= LEAF_SIZE) {
+    if (tam <= leafsize) {
         ikjalgorithm(A, B, C, tam);
         return;
     }
@@ -247,6 +247,12 @@ int main (int argc, char* argv[]) {
         filename = "2000.in";
     } else {
         filename = argv[2];
+    }
+
+    if (argc < 5) {
+        leafsize = 16;
+    } else {
+        leafsize = atoi(argv[4]);
     }
 
     int n = getMatrixSize(filename);
