@@ -47,6 +47,8 @@ public class Shell {
                 }
                 B.add(line);
             }
+
+            br.close();
         } catch (IOException e) {
             System.err.println("Error: " + e);
         }
@@ -57,18 +59,19 @@ public class Shell {
         return res;
     }
 
-    public static void printMatrix(int[][] matrix) {
+    static void printMatrix(int[][] matrix) {
         for (int[] line : matrix) {
             int i = 0;
+        	StringBuilder sb = new StringBuilder(matrix.length);
             for (int number : line) {
                 if (i != 0) {
-                    System.out.print("\t");
+                    sb.append("\t");
                 } else {
                     i++;
                 }
-                System.out.print(number);
+                sb.append(number);
             }
-            System.out.println("");
+            System.out.println(sb.toString());
         }
     }
 

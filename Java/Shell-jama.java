@@ -69,13 +69,15 @@ public class Shell {
 
     static void printMatrix(Matrix matrix, int n) {
         for (int i = 0; i < n; i++) {
+        	StringBuilder sb = new StringBuilder(matrix.length);
             for (int j = 0; j < n; j++) {
                 if (j != 0) {
-                    System.out.print("\t");
+                    sb.append("\t");
                 }
-                System.out.printf("%.0f", matrix.get(i, j));
+                String formattedString = String.format("%.0f", matrix.get(i, j))
+                sb.append(formattedString);
             }
-            System.out.println("");
+            System.out.println(sb.toString());
         }
     }
 
