@@ -4,8 +4,9 @@
 #PROBLEM = blitz-small
 #PROBLEM = ijk-algorithm
 #PROBLEM = ikj-algorithm
-PROBLEM = strassen-algorithm
+#PROBLEM = strassen-algorithm
 #PROBLEM = read-write-only
+PROBLEM = ikj-transposed
 
 TESTSET = 2000
 
