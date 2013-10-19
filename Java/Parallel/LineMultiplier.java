@@ -18,7 +18,7 @@ public class LineMultiplier implements Callable<int[]> {
 			for (int k=0; k<B.size(); k++) {
 				ArrayList<Integer> line = B.get(k);
 				Integer value = line.get(j);
-				CLine[j] += value;
+				CLine[j] += A.get(k)*value;
 			}
 		}
 		return CLine;
