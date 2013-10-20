@@ -70,27 +70,37 @@ public class Shell {
 	}
 
 	public static int[][] parallelMult(ArrayList<ArrayList<Integer>> A,
-			ArrayList<ArrayList<Integer>> B) {
+			ArrayList<ArrayList<Integer>> B, int threadNumber) {
 		int[][] C = new int[A.size()][B.get(0).size()];
-		ExecutorService executor = Executors.newFixedThreadPool(4);
-		List<Future<int[]>> list = new ArrayList<Future<int[]>>();
-		for (int i = 0; i < A.size(); i++) {
-			Callable<int[]> worker = new LineMultiplier(A.get(i), B);
-			Future<int[]> submit = executor.submit(worker);
+		ExecutorService executor = Executors.newFixedThreadPool(threadNumber);
+		List<Future<int[][]>> list = new ArrayList<Future<int[][]>>();
+
+		int part = A.size() / threadNumber;
+		if (part < 1) {
+			part = 1;
+		}
+		for (int i = 0; i < A.size(); i += part) {
+			System.err.println(i);
+			Callable<int[][]> worker = new LineMultiplier(A, B, i, i+part);
+			Future<int[][]> submit = executor.submit(worker);
 			list.add(submit);
 		}
 
 		// now retrieve the result
-		int i = 0;
-		for (Future<int[]> future : list) {
+		int start = 0;
+		int CF[][];
+		for (Future<int[][]> future : list) {
 			try {
-				C[i] = future.get();
+				CF = future.get();
+				for (int i=start; i < start+part; i += 1) {
+					C[i] = CF[i];
+				}
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			} catch (ExecutionException e) {
 				e.printStackTrace();
 			}
-			i++;
+			start+=part;
 		}
 		executor.shutdown();
 
@@ -99,16 +109,22 @@ public class Shell {
 
 	public static void main(String[] args) {
 		String filename;
-		if (args.length < 2) {
+		int cores = Runtime.getRuntime().availableProcessors();
+		System.err.println("Number of cores:\t" + cores);
+		
+		int threads;
+		if (args.length < 3) {
 			filename = "/home/moose/Downloads/matrix-multiplication/Testing/3.in";
+			threads = cores;
 		} else {
 			filename = args[1];
+			threads = Integer.parseInt(args[2]);
 		}
 
 		List<ArrayList<ArrayList<Integer>>> matrices = read(filename);
 		ArrayList<ArrayList<Integer>> A = matrices.get(0);
 		ArrayList<ArrayList<Integer>> B = matrices.get(1);
-		int[][] C = parallelMult(A, B);
+		int[][] C = parallelMult(A, B, threads);
 		printMatrix(C);
 	}
 }
