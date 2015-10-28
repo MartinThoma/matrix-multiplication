@@ -3,10 +3,10 @@
 #PROBLEM = library-cblas
 #PROBLEM = blitz-small
 #PROBLEM = ijk-algorithm
-#PROBLEM = ikj-algorithm
+PROBLEM = ikj-algorithm
 #PROBLEM = strassen-algorithm
 #PROBLEM = read-write-only
-PROBLEM = ikj-transposed
+#PROBLEM = ikj-transposed
 
 TESTSET = 2000
 
@@ -16,7 +16,7 @@ RELEASEFLAGS    = -O3 -D NDEBUG -DBOOST_UBLAS_NDEBUG
 
 make:
 	g++ $(CFLAGS) $(RELEASEFLAGS) $(PROBLEM).cpp -o $(PROBLEM).out
-	
+
 debug:
 	g++ $(CFLAGS) $(DEBUGFLAGS) $(PROBLEM).cpp -o $(PROBLEM).out
 
