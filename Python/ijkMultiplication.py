@@ -1,7 +1,15 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
+"""Read two matrices, multiply them, write the result to standard output."""
+
 from optparse import OptionParser
+
+try:
+    xrange
+except NameError:
+    xrange = range
+
 
 def read(filename):
     lines = open(filename, 'r').read().splitlines()
@@ -15,11 +23,13 @@ def read(filename):
             matrix = B
     return A, B
 
-def printMatrix(matrix):
-    for line in matrix:
-        print "\t".join(map(str,line))
 
-def standardMatrixProduct(A, B):
+def print_matrix(matrix):
+    for line in matrix:
+        print("\t".join(map(str, line)))
+
+
+def standard_matrix_product(A, B):
     n = len(A)
     C = [[0 for i in xrange(n)] for j in xrange(n)]
     for i in xrange(n):
@@ -30,10 +40,13 @@ def standardMatrixProduct(A, B):
 
 if __name__ == "__main__":
     parser = OptionParser()
-    parser.add_option("-i", dest="filename", default="2000.in",
-         help="input file with two matrices", metavar="FILE")
+    parser.add_option("-i",
+                      dest="filename",
+                      default="2000.in",
+                      help="input file with two matrices",
+                      metavar="FILE")
     (options, args) = parser.parse_args()
-    
+
     A, B = read(options.filename)
-    C = standardMatrixProduct(A, B)
-    printMatrix(C)
+    C = standard_matrix_product(A, B)
+    print_matrix(C)
