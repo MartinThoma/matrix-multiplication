@@ -1,19 +1,21 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-import numpy
-
+# Core Library modules
 from optparse import OptionParser
+
+# Third party modules
+import numpy
 
 
 def read(filename):
-    lines = open(filename, 'r').read().splitlines()
+    lines = open(filename, "r").read().splitlines()
     A = []
     B = []
     matrix = A
     for line in lines:
         if line != "":
-            matrix.append(map(int, line.split("\t")))
+            matrix.append([int(el) for el in line.split("\t")])
         else:
             matrix = B
     return A, B
@@ -27,11 +29,13 @@ def print_matrix(matrix):
 
 if __name__ == "__main__":
     parser = OptionParser()
-    parser.add_option("-i",
-                      dest="filename",
-                      default="2000.in",
-                      help="input file with two matrices",
-                      metavar="FILE")
+    parser.add_option(
+        "-i",
+        dest="filename",
+        default="2000.in",
+        help="input file with two matrices",
+        metavar="FILE",
+    )
     (options, args) = parser.parse_args()
 
     A, B = read(options.filename)

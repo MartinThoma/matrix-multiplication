@@ -1,14 +1,17 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-import psyco
-psyco.full()
-
+# Core Library modules
 from optparse import OptionParser
+
+# First party modules
+import psyco
+
+psyco.full()
 
 
 def read(filename):
-    lines = open(filename, 'r').read().splitlines()
+    lines = open(filename, "r").read().splitlines()
     A = []
     B = []
     matrix = A
@@ -34,13 +37,16 @@ def ikj_matrix_product(A, B):
                 C[i][j] += A[i][k] * B[k][j]
     return C
 
+
 if __name__ == "__main__":
     parser = OptionParser()
-    parser.add_option("-i",
-                      dest="filename",
-                      default="2000.in",
-                      help="input file with two matrices",
-                      metavar="FILE")
+    parser.add_option(
+        "-i",
+        dest="filename",
+        default="2000.in",
+        help="input file with two matrices",
+        metavar="FILE",
+    )
     (options, args) = parser.parse_args()
 
     A, B = read(options.filename)

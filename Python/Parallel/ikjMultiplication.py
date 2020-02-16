@@ -3,36 +3,41 @@
 
 import multiprocessing, numpy, ctypes
 
+
 def read(filename):
-    lines = open(filename, 'r').read().splitlines()
+    lines = open(filename, "r").read().splitlines()
     A = []
     B = []
     matrix = A
     for line in lines:
         if line != "":
-            matrix.append(map(int, line.split("\t")))
+            matrix.append([int(el) for el in line.split("\t")])
         else:
             matrix = B
     return A, B
 
+
 def printMatrix(matrix, f):
     for line in matrix:
-        f.write("\t".join(map(str,line)) + "\n")
+        f.write("\t".join([str(el) for el in line]) + "\n")
+
 
 def lineMult(start):
     global A, B, C, part
     n = len(A)
-    for i in xrange(start, start+part):
-        for k in xrange(n):
-            for j in xrange(n):
+    for i in range(start, start + part):
+        for k in range(n):
+            for j in range(n):
                 C[i][j] += A[i][k] * B[k][j]
+
 
 def ikjMatrixProduct(A, B, threadNumber):
     n = len(A)
     pool = multiprocessing.Pool(threadNumber)
 
-    pool.map(lineMult, range(0,n, part))
+    pool.map(lineMult, range(0, n, part))
     return C
+
 
 def extant_file(x):
     """
@@ -42,19 +47,30 @@ def extant_file(x):
         raise argparse.ArgumentError("{0} does not exist".format(x))
     return x
 
+
 if __name__ == "__main__":
     import argparse, sys
     from os.path import isfile
     from argparse import ArgumentParser
 
     parser = ArgumentParser(description="ikjMatrix multiplication")
-    parser.add_argument("-i", "--input",
-        dest="filename", required=True, type=extant_file,
-        help="input file with two matrices", metavar="FILE")
-    parser.add_argument("-o", "--output",
-        type=argparse.FileType(mode='w'),
-        default=sys.stdout, dest="output",
-        help="file to write output to (default=stdout)")
+    parser.add_argument(
+        "-i",
+        "--input",
+        dest="filename",
+        required=True,
+        type=extant_file,
+        help="input file with two matrices",
+        metavar="FILE",
+    )
+    parser.add_argument(
+        "-o",
+        "--output",
+        type=argparse.FileType(mode="w"),
+        default=sys.stdout,
+        dest="output",
+        help="file to write output to (default=stdout)",
+    )
     args = parser.parse_args()
 
     A, B = read(args.filename)
@@ -63,8 +79,8 @@ if __name__ == "__main__":
     threadNumber = 2
     part = len(A) / threadNumber
     if part < 1:
-	    part = 1
+        part = 1
 
-    C = [[0 for i in xrange(n)] for j in xrange(n)]
+    C = [[0 for i in range(n)] for j in range(n)]
     C = ikjMatrixProduct(A, B, threadNumber)
     printMatrix(C, args.output)

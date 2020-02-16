@@ -2,14 +2,14 @@
 # -*- coding: utf-8 -*-
 
 
-def read(filename):
-    lines = open(filename, 'r').read().splitlines()
+def read(filename):  #  -> Tuple[List[List[int]], List[List[int]]]
+    lines = open(filename, "r").read().splitlines()
     A = []
     B = []
     matrix = A
     for line in lines:
         if line != "":
-            matrix.append(map(int, line.split("\t")))
+            matrix.append([int(el) for el in line.split("\t")])
         else:
             matrix = B
     return A, B
@@ -22,10 +22,10 @@ def print_matrix(matrix, f):
 
 def ikj_matrix_product(A, B):
     n = len(A)
-    C = [[0 for i in xrange(n)] for j in xrange(n)]
-    for i in xrange(n):
-        for k in xrange(n):
-            for j in xrange(n):
+    C = [[0 for i in range(n)] for j in range(n)]
+    for i in range(n):
+        for k in range(n):
+            for j in range(n):
                 C[i][j] += A[i][k] * B[k][j]
     return C
 
@@ -46,16 +46,23 @@ if __name__ == "__main__":
     from argparse import ArgumentParser
 
     parser = ArgumentParser(description="ikjMatrix multiplication")
-    parser.add_argument("-i", "--input",
-                        dest="filename",
-                        required=True,
-                        type=extant_file,
-                        help="input file with two matrices",
-                        metavar="FILE")
-    parser.add_argument("-o", "--output",
-                        type=argparse.FileType(mode='w'),
-                        default=sys.stdout, dest="output",
-                        help="file to write output to (default=stdout)")
+    parser.add_argument(
+        "-i",
+        "--input",
+        dest="filename",
+        required=True,
+        type=extant_file,
+        help="input file with two matrices",
+        metavar="FILE",
+    )
+    parser.add_argument(
+        "-o",
+        "--output",
+        type=argparse.FileType(mode="w"),
+        default=sys.stdout,
+        dest="output",
+        help="file to write output to (default=stdout)",
+    )
     args = parser.parse_args()
 
     A, B = read(args.filename)

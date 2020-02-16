@@ -3,7 +3,9 @@
 
 """Create random integer n×n matrices."""
 
+# Core Library modules
 import random
+
 random.seed(1234)
 
 
@@ -22,7 +24,7 @@ def create_random_matrix(n):
 
 
 def save_matrix(matrix_a, matrix_b, filename):
-    f = open(filename, 'w')
+    f = open(filename, "w")
     for i, matrix in enumerate([matrix_a, matrix_b]):
         if i != 0:
             f.write("\n")
@@ -32,16 +34,20 @@ def save_matrix(matrix_a, matrix_b, filename):
 
 def get_parser():
     from argparse import ArgumentParser, ArgumentDefaultsHelpFormatter
-    parser = ArgumentParser(description=__doc__,
-                            formatter_class=ArgumentDefaultsHelpFormatter)
-    parser.add_argument("-n",
-                        dest="n",
-                        default=2000,
-                        type=int,
-                        help="How big should the two matrices be?")
+
+    parser = ArgumentParser(
+        description=__doc__, formatter_class=ArgumentDefaultsHelpFormatter
+    )
+    parser.add_argument(
+        "-n",
+        dest="n",
+        default=2000,
+        type=int,
+        help="How big should the two matrices be?",
+    )
     return parser
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     args = get_parser().parse_args()
     main(args.n)

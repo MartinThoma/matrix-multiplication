@@ -1,12 +1,12 @@
-#PROBLEM = library-blitz
-#PROBLEM = library-boost
-#PROBLEM = library-cblas
-#PROBLEM = blitz-small
+#PROBLEM = read-write-only
 #PROBLEM = ijk-algorithm
 PROBLEM = ikj-algorithm
+#PROBLEM = library-boost
 #PROBLEM = strassen-algorithm
-#PROBLEM = read-write-only
-#PROBLEM = ikj-transposed
+#PROBLEM = library-blitz
+#PROBLEM = library-cblas
+#PROBLEM = blitz-small
+#PROBLEM = ikj-transposed  # buggy
 
 TESTSET = 2000
 
