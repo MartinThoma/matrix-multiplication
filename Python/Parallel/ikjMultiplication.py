@@ -71,13 +71,20 @@ if __name__ == "__main__":
         dest="output",
         help="file to write output to (default=stdout)",
     )
+    parser.add_argument(
+        "--threads",
+        type=int,
+        default=2,
+        dest="threads",
+        help="number of threads to use; use power of 2 (default: 2)",
+    )
     args = parser.parse_args()
 
     A, B = read(args.filename)
     n, m, p = len(A), len(A[0]), len(B[0])
 
-    threadNumber = 2
-    part = len(A) / threadNumber
+    threadNumber = args.threads
+    part = len(A) // threadNumber
     if part < 1:
         part = 1
 
