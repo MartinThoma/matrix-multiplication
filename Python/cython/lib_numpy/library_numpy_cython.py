@@ -1,6 +1,6 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-#cython: language_level=3
+# cython: language_level=3
 
 # Core Library modules
 from optparse import OptionParser
