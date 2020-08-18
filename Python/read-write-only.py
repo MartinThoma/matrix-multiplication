@@ -1,5 +1,4 @@
 #!/usr/bin/python
-# -*- coding: utf-8 -*-
 
-lines = open("../Testing/2000.in", "r").read()
+lines = open("../Testing/2000.in").read()
 print(lines)

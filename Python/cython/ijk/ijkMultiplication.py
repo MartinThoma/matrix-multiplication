@@ -1,11 +1,10 @@
 #!/usr/bin/python
-# -*- coding: utf-8 -*-
 
 from ijk_multiplication_c import ijk_matrix_product
 
 
 def read(filename):  #  -> Tuple[List[List[int]], List[List[int]]]
-    lines = open(filename, "r").read().splitlines()
+    lines = open(filename).read().splitlines()
     A = []
     B = []
     matrix = A
@@ -27,15 +26,15 @@ def extant_file(x):
     'Type' for argparse - checks that file exists but does not open.
     """
     if not isfile(x):
-        raise argparse.ArgumentError("{0} does not exist".format(x))
+        raise argparse.ArgumentError(f"{x} does not exist")
     return x
 
 
 if __name__ == "__main__":
     import argparse
     import sys
-    from os.path import isfile
     from argparse import ArgumentParser
+    from os.path import isfile
 
     parser = ArgumentParser(description="ijkMatrix multiplication")
     parser.add_argument(

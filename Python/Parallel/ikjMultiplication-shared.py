@@ -1,11 +1,13 @@
 #!/usr/bin/python
-# -*- coding: utf-8 -*-
 
-import multiprocessing, numpy, ctypes
+import ctypes
+import multiprocessing
+
+import numpy
 
 
 def read(filename):
-    lines = open(filename, "r").read().splitlines()
+    lines = open(filename).read().splitlines()
     A = []
     B = []
     matrix = A
@@ -50,14 +52,15 @@ def extant_file(x):
     'Type' for argparse - checks that file exists but does not open.
     """
     if not isfile(x):
-        raise argparse.ArgumentError("{0} does not exist".format(x))
+        raise argparse.ArgumentError(f"{x} does not exist")
     return x
 
 
 if __name__ == "__main__":
-    import argparse, sys
-    from os.path import isfile
+    import argparse
+    import sys
     from argparse import ArgumentParser
+    from os.path import isfile
 
     parser = ArgumentParser(description="ikjMatrix multiplication")
     parser.add_argument(

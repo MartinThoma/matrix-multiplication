@@ -1,10 +1,10 @@
 #!/usr/bin/python
-# -*- coding: utf-8 -*-
 
 # Core Library modules
 from math import ceil, log
 from optparse import OptionParser
-from strassen import strassen, read, print_matrix
+
+from strassen import print_matrix, read, strassen
 
 if __name__ == "__main__":
     parser = OptionParser()

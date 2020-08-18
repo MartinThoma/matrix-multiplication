@@ -55,7 +55,7 @@ Result read(string filename) {
 	return ab;
 }
 
-vector< vector<int> > ikjalgorithm(vector< vector<int> > A, 
+vector< vector<int> > ikjalgorithm(vector< vector<int> > A,
 									vector< vector<int> > B) {
 	int n = A.size();
 
@@ -105,10 +105,10 @@ int main (int argc, char* argv[]) {
 			B[i*n+j] = result.B[i][j];
 		}
 	}
-	
-	 cblas_sgemm(CblasRowMajor, 
+
+	 cblas_sgemm(CblasRowMajor,
                 CblasNoTrans,
-                CblasNoTrans, 
+                CblasNoTrans,
                 n,
                 n,
                 n,

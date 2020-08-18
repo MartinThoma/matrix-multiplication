@@ -8,8 +8,8 @@
 using namespace std;
 
 int getMatrixN(string filename) {
-    std::ifstream inFile(filename.c_str()); 
-    return std::count(std::istreambuf_iterator<char>(inFile), 
+    std::ifstream inFile(filename.c_str());
+    return std::count(std::istreambuf_iterator<char>(inFile),
              std::istreambuf_iterator<char>(), '\n');
 }
 
@@ -41,9 +41,9 @@ void read(string filename, vector< vector<double> > &A) {
 }
 
 vector< vector<double> > ikjalgorithmTranspose(
-                                   vector< vector<double> > &J, 
+                                   vector< vector<double> > &J,
 								   vector< vector<double> > &T,
-								   vector< vector<double> > &R, 
+								   vector< vector<double> > &R,
                                    int n, int m) {
 	for (register int i = 0; i < n; i++) {
 		for (register int k = 0; k < m; k++) {
@@ -62,7 +62,7 @@ vector< vector<double> > ikjalgorithmTranspose(
 	return R;
 }
 
-void transpose(vector< vector<double> > &A, 
+void transpose(vector< vector<double> > &A,
                vector< vector<double> > &B, int n, int m) {
     for (int i=0; i < n; i++) {
         for (int j=0; j < m; j++) {

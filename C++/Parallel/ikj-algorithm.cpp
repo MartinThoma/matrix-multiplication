@@ -44,7 +44,7 @@ void read(string filename, vector< vector<int> > &A, vector< vector<int> > &B) {
 	fclose (matrixfile);
 }
 
-vector< vector<int> > ikjalgorithm(vector< vector<int> > A, 
+vector< vector<int> > ikjalgorithm(vector< vector<int> > A,
 								   vector< vector<int> > B,
 								   vector< vector<int> > &C, int n) {
     #pragma omp parallel for

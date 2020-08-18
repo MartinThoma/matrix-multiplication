@@ -49,7 +49,7 @@ Result read(string filename) {
 	return ab;
 }
 
-vector< vector<int> > ijkalgorithm(vector< vector<int> > A, 
+vector< vector<int> > ijkalgorithm(vector< vector<int> > A,
 									vector< vector<int> > B) {
 	int n = A.size();
 

@@ -1,5 +1,4 @@
 #!/usr/bin/python
-# -*- coding: utf-8 -*-
 
 # Core Library modules
 from optparse import OptionParser
@@ -10,7 +9,7 @@ import scipy
 
 
 def read(filename):
-    lines = open(filename, "r").read().splitlines()
+    lines = open(filename).read().splitlines()
     A = []
     B = []
     matrix = A

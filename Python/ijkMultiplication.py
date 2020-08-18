@@ -1,5 +1,4 @@
 #!/usr/bin/python
-# -*- coding: utf-8 -*-
 
 """Read two matrices, multiply them, write the result to standard output."""
 
@@ -13,7 +12,7 @@ except NameError:
 
 
 def read(filename):
-    lines = open(filename, "r").read().splitlines()
+    lines = open(filename).read().splitlines()
     A = []
     B = []
     matrix = A

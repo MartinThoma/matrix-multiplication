@@ -53,7 +53,7 @@ void printMatrix(boost::numeric::ublas::matrix<int> matrix) {
 			cout << matrix(i, j);
 			if(j+1 != matrix.size2()) {
 				cout << "\t";
-			}	
+			}
 		}
 		cout << endl;
 	}

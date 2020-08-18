@@ -56,16 +56,16 @@
     \begin{tikzpicture}
        \begin{axis}[
             width=15cm, height=8cm, % size of the image
-            grid = major,           
+            grid = major,
             grid style={dashed, gray!30},
             %xmode=log,log basis x=2,
             %ymode=log,log basis y=2,
-            ymin=0, 
+            ymin=0,
             ylabel=time in seconds,
             xlabel=leaf size]
 
             \addplot table [id=exp]{LEAF_SIZE.csv};
-            %\addplot[smooth,samples=200,domain=2:130,thick,red] {600/(x)+15}; 
+            %\addplot[smooth,samples=200,domain=2:130,thick,red] {600/(x)+15};
             \legend{%
                 2000 $\times$ 2000 matrix,
                 $\frac{600}{x}+15$
@@ -77,20 +77,20 @@
     \begin{tikzpicture}
        \begin{axis}[
             width=15cm, height=8cm, % size of the image
-            grid = major,           
+            grid = major,
             grid style={dashed, gray!30},
             xmode=log,log basis x=2,
             ymode=log,log basis y=10,
-            ymin=0, 
+            ymin=0,
             ylabel=time in seconds,
             xlabel=leaf size]
 
             \addplot table [id=exp]{LEAF_SIZE.csv};
-            \addplot[smooth,samples=200,domain=2:130,thick,red]   {750}; 
-            \addplot[smooth,samples=200,domain=2:130,thick,green] {197}; 
-            \addplot[smooth,samples=200,domain=2:130,thick,orange] {66}; 
-            \addplot[smooth,samples=200,domain=2:130,thick,lime]   {30}; 
-            \addplot[smooth,samples=200,domain=2:130,thick,purple] {19}; 
+            \addplot[smooth,samples=200,domain=2:130,thick,red]   {750};
+            \addplot[smooth,samples=200,domain=2:130,thick,green] {197};
+            \addplot[smooth,samples=200,domain=2:130,thick,orange] {66};
+            \addplot[smooth,samples=200,domain=2:130,thick,lime]   {30};
+            \addplot[smooth,samples=200,domain=2:130,thick,purple] {19};
             \legend{%
                 2000 $\times$ 2000 matrix,
                 $750$ seconds,

@@ -1,5 +1,4 @@
 #!/usr/bin/python
-# -*- coding: utf-8 -*-
 
 # Core Library modules
 from optparse import OptionParser
@@ -19,7 +18,7 @@ parser.add_option(
 
 
 def read(filename):
-    lines = open(filename, "r").read().splitlines()
+    lines = open(filename).read().splitlines()
     J = []
     for line in lines:
         J.append(map(float, line.split("\t")))

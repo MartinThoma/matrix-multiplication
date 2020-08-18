@@ -7,7 +7,7 @@
 #include <algorithm>
 
 #define N 2000
- 
+
 using namespace std;
 
 struct Result {
@@ -73,7 +73,7 @@ void printMatrix(blitz::Matrix<int> matrix, int n) {
 			cout << matrix(i, j);
 			if(j+1 != N) {
 				cout << "\t";
-			}	
+			}
 		}
 		cout << endl;
 	}

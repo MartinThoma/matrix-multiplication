@@ -1,5 +1,4 @@
 #!/usr/bin/python
-# -*- coding: utf-8 -*-
 
 # Core Library modules
 from math import ceil, log
@@ -7,7 +6,7 @@ from optparse import OptionParser
 
 
 def read(filename):
-    lines = open(filename, "r").read().splitlines()
+    lines = open(filename).read().splitlines()
     A = []
     B = []
     matrix = A

@@ -11,7 +11,7 @@ import org.kohsuke.args4j.CmdLineParser;
 
 /**
  * This class manages I/O.
- * 
+ *
  * @author Martin Thoma
  */
 public class Shell {
